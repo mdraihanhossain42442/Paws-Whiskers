@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paws & Whiskers shares practical, friendly guides to cat and dog care, nutrition, grooming, training, and happy everyday living with pets.">
+  <meta name="theme-color" content="#f7f3eb">
+  <title>Paws & Whiskers | Practical Cat & Dog Care Guides</title>
+  <style>
+    :root{
+      --cream:#f7f3eb;--paper:#fffdf8;--ink:#26352e;--muted:#68766d;
+      --green:#456b55;--green-dark:#2f4d3b;--sage:#dce8d9;--peach:#f2d5c3;
+      --line:#e7e1d6;--shadow:0 16px 45px rgba(45,60,48,.10);--radius:22px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .container{width:min(1120px,calc(100% - 40px));margin:auto}
+    header{position:sticky;top:0;z-index:30;background:rgba(247,243,235,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Georgia,serif;font-weight:700;font-size:1.28rem;letter-spacing:-.03em}
+    .brand-icon{width:42px;height:42px;display:grid;place-items:center;background:var(--sage);border-radius:15px;font-size:1.35rem}
+    .brand span:last-child em{font-style:normal;color:var(--green)}
+    .nav-links{display:flex;gap:25px;align-items:center}
+    .nav-links a{text-decoration:none;color:var(--muted);font-size:.94rem;font-weight:650}
+    .nav-links a:hover{color:var(--green-dark)}
+    .menu-btn{display:none;border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:10px;color:var(--ink)}
+    .hero{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:52px;padding:76px 0 64px}
+    .eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.15em;color:var(--green);font-weight:800}
+    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.13;letter-spacing:-.035em}
+    h1{font-size:clamp(2.7rem,5.7vw,4.8rem);margin:15px 0 18px}
+    h1 span{color:var(--green)}
+    .lead{font-size:1.1rem;color:var(--muted);max-width:570px}
+    .button-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid transparent;transition:transform .18s,background .18s;cursor:pointer}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--green);color:white}
+    .btn-primary:hover{background:var(--green-dark)}
+    .btn-outline{border-color:#b9c8b8;color:var(--green-dark);background:transparent}
+    .hero-note{font-size:.78rem;color:#849087;margin-top:13px}
+    .hero-photo{min-height:410px;border-radius:32px;overflow:hidden;position:relative;background:linear-gradient(135deg,#dce8d9,#f2d5c3);box-shadow:var(--shadow)}
+    .hero-photo img{width:100%;height:100%;min-height:410px;object-fit:cover}
+    .photo-label{position:absolute;left:18px;bottom:18px;background:rgba(255,253,248,.94);padding:10px 15px;border-radius:14px;font-size:.86rem;font-weight:750}
+    section{padding:62px 0}
+    .section-head{max-width:690px;margin-bottom:28px}
+    .section-head h2{font-size:clamp(2rem,4vw,3rem);margin:10px 0}
+    .section-head p{color:var(--muted);margin:0}
+    .category-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .category{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-columns:.85fr 1.15fr;min-height:210px}
+    .category img{width:100%;height:100%;object-fit:cover}
+    .category-content{padding:24px}
+    .category h3{font-size:1.55rem;margin:0 0 9px}
+    .category p{color:var(--muted);font-size:.92rem;margin:0 0 15px}
+    .text-link{color:var(--green);font-weight:800;text-decoration:none}
+    .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+    .post{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 25px rgba(45,60,48,.04)}
+    .post img{width:100%;height:190px;object-fit:cover}
+    .post-content{padding:20px}
+    .post small{color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    .post h3{font-size:1.35rem;margin:9px 0}
+    .post p{color:var(--muted);font-size:.92rem;margin:0}
+    .wellness{background:var(--sage);border-radius:28px;padding:34px;display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center}
+    .wellness h2{font-size:clamp(1.8rem,3vw,2.5rem);margin:8px 0}
+    .wellness p{color:#53665a;max-width:700px;margin:0}
+    .disclosure{font-size:.8rem;color:#637367;margin-top:12px;max-width:760px}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+    .about-grid p{color:var(--muted)}
+    .info-box{background:var(--paper);border:1px solid var(--line);padding:22px;border-radius:18px;color:var(--muted);font-size:.92rem}
+    footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.87rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+    .footer-links{display:flex;gap:17px;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--green)}
+    .modal-backdrop{display:none;position:fixed;inset:0;z-index:60;background:rgba(28,40,32,.58);padding:18px;align-items:center;justify-content:center}
+    .modal-backdrop.open{display:flex}
+    .modal{width:min(500px,100%);background:var(--paper);border-radius:22px;padding:27px;box-shadow:var(--shadow)}
+    .modal h2{margin:0 0 10px}
+    .modal p{color:var(--muted)}
+    .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn-cancel{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:32px;padding-top:55px}.hero-photo,.hero-photo img{min-height:340px}.category-grid{grid-template-columns:1fr}.post-grid{grid-template-columns:1fr 1fr}.wellness{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr;gap:15px}}
+    @media(max-width:620px){
+      .container{width:calc(100% - 30px)}.nav{min-height:68px}.menu-btn{display:block}
+      .nav-links{display:none;position:absolute;top:68px;left:15px;right:15px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;flex-direction:column;align-items:stretch;gap:13px;box-shadow:var(--shadow)}
+      .nav-links.open{display:flex}.nav-links a{padding:5px}
+      .hero{padding:44px 0 38px}section{padding:45px 0}.category{grid-template-columns:1fr}.category img{height:190px}
+      .post-grid{grid-template-columns:1fr}.button-row .btn{width:100%}.wellness{padding:25px}.footer-inner{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-icon">🐾</span><span>Paws <em>&</em> Whiskers</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#cats">Cat Care</a><a href="#dogs">Dog Care</a><a href="#articles">Latest Guides</a><a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero" id="home">
+      <div>
+        <div class="eyebrow">A happier life with pets</div>
+        <h1>Little paws. <span>Big love.</span></h1>
+        <p class="lead">Friendly, practical guides to help you care for your cats and dogs — from everyday nutrition and grooming to playtime, training, and wellbeing.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="#articles">Explore Pet Guides ↓</a>
+          <a class="btn btn-outline smartlink" href="https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3" target="_blank" rel="nofollow sponsored noopener">Sponsored Offer ↗</a>
+        </div>
+        <p class="hero-note">The “Sponsored Offer” link leads to a third-party destination and is not a pet-care resource.</p>
+      </div>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=85" alt="A happy dog sitting outdoors with its owner" loading="eager">
+        <div class="photo-label">Care, comfort & companionship</div>
+      </div>
+    </section>
+
+    <section class="container" id="cats">
+      <div class="section-head"><div class="eyebrow">Explore by pet</div><h2>Care guides for every kind of companion</h2><p>Start with the topics that matter most to your furry family member.</p></div>
+      <div class="category-grid">
+        <article class="category">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=80" alt="Cat relaxing at home" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=80'">
+          <div class="category-content"><h3>Cat Care</h3><p>Learn about cat nutrition, litter habits, grooming, enrichment, and creating a calm home.</p><a class="text-link" href="#articles">Explore cat guides →</a></div>
+        </article>
+        <article class="category" id="dogs">
+          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80" alt="Golden retriever outdoors" loading="lazy">
+          <div class="category-content"><h3>Dog Care</h3><p>Helpful ideas for feeding, exercise, basic training, grooming, and everyday dog wellbeing.</p><a class="text-link" href="#articles">Explore dog guides →</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" id="articles">
+      <div class="section-head"><div class="eyebrow">The latest</div><h2>Helpful reads for pet parents</h2><p>Use these starter topics as a foundation. Add your own researched articles and link each card to its full post.</p></div>
+      <div class="post-grid">
+        <article class="post">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=85" alt="Close-up of a cat" loading="lazy">
+          <div class="post-content"><small>Cat Nutrition</small><h3>What Do Cats Eat? A Beginner’s Guide</h3><p>Understand the basics of balanced cat food, fresh water, and feeding routines.</p></div>
+        </article>
+        <article class="post">
+          <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=85" alt="Happy dog looking at the camera" loading="lazy">
+          <div class="post-content"><small>Dog Wellbeing</small><h3>Simple Ways to Keep Your Dog Active</h3><p>Explore age-appropriate play, walks, enrichment, and safe daily activity.</p></div>
+        </article>
+        <article class="post">
+          <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=85" alt="Dog being gently groomed" loading="lazy">
+          <div class="post-content"><small>Grooming</small><h3>A Gentle Grooming Routine for Pets</h3><p>Build a comfortable routine for brushing, coat care, and checking paws and ears.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="wellness">
+        <div>
+          <div class="eyebrow">A note for visitors</div>
+          <h2>Explore a separate sponsored destination</h2>
+          <p>This optional third-party link is an advertisement and is separate from our cat and dog care articles. It may lead to offers or content unrelated to pets. Review the destination before choosing to continue.</p>
+          <div class="disclosure">Advertising disclosure: Paws & Whiskers may receive compensation if you visit or interact with this sponsored link, depending on the third-party provider’s terms. We do not control the destination’s content, eligibility, or privacy practices.</div>
+        </div>
+        <a class="btn btn-primary smartlink" href="https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3" target="_blank" rel="nofollow sponsored noopener">View Sponsored Offer ↗</a>
+      </div>
+    </section>
+
+    <section class="container" id="about">
+      <div class="about-grid">
+        <div><div class="eyebrow">About us</div><h2>Thoughtful information for people who love pets.</h2><p>Paws & Whiskers is a pet-care blog concept focused on accessible information for cat and dog owners. Our goal is to make everyday pet care easier to understand.</p></div>
+        <div class="info-box"><strong>Health note:</strong> Our articles are for general educational purposes and are not a substitute for advice from a licensed veterinarian. Contact a veterinary professional about your pet’s individual health, diet, or behaviour needs.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Paws & Whiskers. All rights reserved.</div>
+      <div class="footer-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="privacy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a></div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="externalNotice" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <h2 id="modalTitle">You’re opening a sponsored link</h2>
+      <p>This link goes to a third-party website and may show offers or content unrelated to pet care. Its terms and privacy practices are controlled by that provider. Continue only if you want to visit.</p>
+      <div class="modal-actions"><button class="btn btn-primary" id="continueBtn">Continue ↗</button><button class="btn btn-cancel" id="cancelBtn">Stay on this site</button></div>
+    </div>
+  </div>
+
+  <script>
+    // Replace this URL in one place if your Smartlink changes.
+    const SMARTLINK_URL = "https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => {
+      const opened = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(opened));
+    });
+    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }));
+
+    // The two sponsored buttons open only after an explicit visitor click and confirmation.
+    const modal = document.getElementById("externalNotice");
+    let nextUrl = null;
+    document.querySelectorAll(".smartlink").forEach(link => {
+      link.href = SMARTLINK_URL;
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        nextUrl = SMARTLINK_URL;
+        modal.classList.add("open");
+        document.getElementById("continueBtn").focus();
+      });
+    });
+    document.getElementById("continueBtn").addEventListener("click", () => {
+      if (nextUrl) window.open(nextUrl, "_blank", "noopener,noreferrer");
+      nextUrl = null;
+      modal.classList.remove("open");
+    });
+    function closeModal(){ nextUrl = null; modal.classList.remove("open"); }
+    document.getElementById("cancelBtn").addEventListener("click", closeModal);
+    modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
+    document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+  </script>
+</body>
+</html>
