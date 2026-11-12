@@ -1,229 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Paws & Whiskers shares practical, friendly guides to cat and dog care, nutrition, grooming, training, and happy everyday living with pets.">
-  <meta name="theme-color" content="#f7f3eb">
-  <title>Paws & Whiskers | Practical Cat & Dog Care Guides</title>
-  <style>
-    :root{
-      --cream:#f7f3eb;--paper:#fffdf8;--ink:#26352e;--muted:#68766d;
-      --green:#456b55;--green-dark:#2f4d3b;--sage:#dce8d9;--peach:#f2d5c3;
-      --line:#e7e1d6;--shadow:0 16px 45px rgba(45,60,48,.10);--radius:22px
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}
-    img{max-width:100%;display:block}
-    a{color:inherit}
-    .container{width:min(1120px,calc(100% - 40px));margin:auto}
-    header{position:sticky;top:0;z-index:30;background:rgba(247,243,235,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Georgia,serif;font-weight:700;font-size:1.28rem;letter-spacing:-.03em}
-    .brand-icon{width:42px;height:42px;display:grid;place-items:center;background:var(--sage);border-radius:15px;font-size:1.35rem}
-    .brand span:last-child em{font-style:normal;color:var(--green)}
-    .nav-links{display:flex;gap:25px;align-items:center}
-    .nav-links a{text-decoration:none;color:var(--muted);font-size:.94rem;font-weight:650}
-    .nav-links a:hover{color:var(--green-dark)}
-    .menu-btn{display:none;border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:10px;color:var(--ink)}
-    .hero{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:52px;padding:76px 0 64px}
-    .eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.15em;color:var(--green);font-weight:800}
-    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.13;letter-spacing:-.035em}
-    h1{font-size:clamp(2.7rem,5.7vw,4.8rem);margin:15px 0 18px}
-    h1 span{color:var(--green)}
-    .lead{font-size:1.1rem;color:var(--muted);max-width:570px}
-    .button-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid transparent;transition:transform .18s,background .18s;cursor:pointer}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:var(--green);color:white}
-    .btn-primary:hover{background:var(--green-dark)}
-    .btn-outline{border-color:#b9c8b8;color:var(--green-dark);background:transparent}
-    .hero-note{font-size:.78rem;color:#849087;margin-top:13px}
-    .hero-photo{min-height:410px;border-radius:32px;overflow:hidden;position:relative;background:linear-gradient(135deg,#dce8d9,#f2d5c3);box-shadow:var(--shadow)}
-    .hero-photo img{width:100%;height:100%;min-height:410px;object-fit:cover}
-    .photo-label{position:absolute;left:18px;bottom:18px;background:rgba(255,253,248,.94);padding:10px 15px;border-radius:14px;font-size:.86rem;font-weight:750}
-    section{padding:62px 0}
-    .section-head{max-width:690px;margin-bottom:28px}
-    .section-head h2{font-size:clamp(2rem,4vw,3rem);margin:10px 0}
-    .section-head p{color:var(--muted);margin:0}
-    .category-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .category{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-columns:.85fr 1.15fr;min-height:210px}
-    .category img{width:100%;height:100%;object-fit:cover}
-    .category-content{padding:24px}
-    .category h3{font-size:1.55rem;margin:0 0 9px}
-    .category p{color:var(--muted);font-size:.92rem;margin:0 0 15px}
-    .text-link{color:var(--green);font-weight:800;text-decoration:none}
-    .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
-    .post{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 25px rgba(45,60,48,.04)}
-    .post img{width:100%;height:190px;object-fit:cover}
-    .post-content{padding:20px}
-    .post small{color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-    .post h3{font-size:1.35rem;margin:9px 0}
-    .post p{color:var(--muted);font-size:.92rem;margin:0}
-    .wellness{background:var(--sage);border-radius:28px;padding:34px;display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center}
-    .wellness h2{font-size:clamp(1.8rem,3vw,2.5rem);margin:8px 0}
-    .wellness p{color:#53665a;max-width:700px;margin:0}
-    .disclosure{font-size:.8rem;color:#637367;margin-top:12px;max-width:760px}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
-    .about-grid p{color:var(--muted)}
-    .info-box{background:var(--paper);border:1px solid var(--line);padding:22px;border-radius:18px;color:var(--muted);font-size:.92rem}
-    footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.87rem}
-    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-    .footer-links{display:flex;gap:17px;flex-wrap:wrap}
-    .footer-links a{color:var(--muted);text-decoration:none}
-    .footer-links a:hover{color:var(--green)}
-    .modal-backdrop{display:none;position:fixed;inset:0;z-index:60;background:rgba(28,40,32,.58);padding:18px;align-items:center;justify-content:center}
-    .modal-backdrop.open{display:flex}
-    .modal{width:min(500px,100%);background:var(--paper);border-radius:22px;padding:27px;box-shadow:var(--shadow)}
-    .modal h2{margin:0 0 10px}
-    .modal p{color:var(--muted)}
-    .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    .btn-cancel{background:transparent;border:1px solid var(--line);color:var(--ink)}
-    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:32px;padding-top:55px}.hero-photo,.hero-photo img{min-height:340px}.category-grid{grid-template-columns:1fr}.post-grid{grid-template-columns:1fr 1fr}.wellness{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr;gap:15px}}
-    @media(max-width:620px){
-      .container{width:calc(100% - 30px)}.nav{min-height:68px}.menu-btn{display:block}
-      .nav-links{display:none;position:absolute;top:68px;left:15px;right:15px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;flex-direction:column;align-items:stretch;gap:13px;box-shadow:var(--shadow)}
-      .nav-links.open{display:flex}.nav-links a{padding:5px}
-      .hero{padding:44px 0 38px}section{padding:45px 0}.category{grid-template-columns:1fr}.category img{height:190px}
-      .post-grid{grid-template-columns:1fr}.button-row .btn{width:100%}.wellness{padding:25px}.footer-inner{align-items:flex-start;flex-direction:column}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#home"><span class="brand-icon">🐾</span><span>Paws <em>&</em> Whiskers</span></a>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
-      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-        <a href="#home">Home</a><a href="#cats">Cat Care</a><a href="#dogs">Dog Care</a><a href="#articles">Latest Guides</a><a href="#about">About</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="container hero" id="home">
-      <div>
-        <div class="eyebrow">A happier life with pets</div>
-        <h1>Little paws. <span>Big love.</span></h1>
-        <p class="lead">Friendly, practical guides to help you care for your cats and dogs — from everyday nutrition and grooming to playtime, training, and wellbeing.</p>
-        <div class="button-row">
-          <a class="btn btn-primary" href="#articles">Explore Pet Guides ↓</a>
-          <a class="btn btn-outline smartlink" href="https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3" target="_blank" rel="nofollow sponsored noopener">Sponsored Offer ↗</a>
-        </div>
-        <p class="hero-note">The “Sponsored Offer” link leads to a third-party destination and is not a pet-care resource.</p>
-      </div>
-      <div class="hero-photo">
-        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=85" alt="A happy dog sitting outdoors with its owner" loading="eager">
-        <div class="photo-label">Care, comfort & companionship</div>
-      </div>
-    </section>
-
-    <section class="container" id="cats">
-      <div class="section-head"><div class="eyebrow">Explore by pet</div><h2>Care guides for every kind of companion</h2><p>Start with the topics that matter most to your furry family member.</p></div>
-      <div class="category-grid">
-        <article class="category">
-          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=80" alt="Cat relaxing at home" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=80'">
-          <div class="category-content"><h3>Cat Care</h3><p>Learn about cat nutrition, litter habits, grooming, enrichment, and creating a calm home.</p><a class="text-link" href="#articles">Explore cat guides →</a></div>
-        </article>
-        <article class="category" id="dogs">
-          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80" alt="Golden retriever outdoors" loading="lazy">
-          <div class="category-content"><h3>Dog Care</h3><p>Helpful ideas for feeding, exercise, basic training, grooming, and everyday dog wellbeing.</p><a class="text-link" href="#articles">Explore dog guides →</a></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="container" id="articles">
-      <div class="section-head"><div class="eyebrow">The latest</div><h2>Helpful reads for pet parents</h2><p>Use these starter topics as a foundation. Add your own researched articles and link each card to its full post.</p></div>
-      <div class="post-grid">
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=85" alt="Close-up of a cat" loading="lazy">
-          <div class="post-content"><small>Cat Nutrition</small><h3>What Do Cats Eat? A Beginner’s Guide</h3><p>Understand the basics of balanced cat food, fresh water, and feeding routines.</p></div>
-        </article>
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=85" alt="Happy dog looking at the camera" loading="lazy">
-          <div class="post-content"><small>Dog Wellbeing</small><h3>Simple Ways to Keep Your Dog Active</h3><p>Explore age-appropriate play, walks, enrichment, and safe daily activity.</p></div>
-        </article>
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=85" alt="Dog being gently groomed" loading="lazy">
-          <div class="post-content"><small>Grooming</small><h3>A Gentle Grooming Routine for Pets</h3><p>Build a comfortable routine for brushing, coat care, and checking paws and ears.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="container">
-      <div class="wellness">
-        <div>
-          <div class="eyebrow">A note for visitors</div>
-          <h2>Explore a separate sponsored destination</h2>
-          <p>This optional third-party link is an advertisement and is separate from our cat and dog care articles. It may lead to offers or content unrelated to pets. Review the destination before choosing to continue.</p>
-          <div class="disclosure">Advertising disclosure: Paws & Whiskers may receive compensation if you visit or interact with this sponsored link, depending on the third-party provider’s terms. We do not control the destination’s content, eligibility, or privacy practices.</div>
-        </div>
-        <a class="btn btn-primary smartlink" href="https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3" target="_blank" rel="nofollow sponsored noopener">View Sponsored Offer ↗</a>
-      </div>
-    </section>
-
-    <section class="container" id="about">
-      <div class="about-grid">
-        <div><div class="eyebrow">About us</div><h2>Thoughtful information for people who love pets.</h2><p>Paws & Whiskers is a pet-care blog concept focused on accessible information for cat and dog owners. Our goal is to make everyday pet care easier to understand.</p></div>
-        <div class="info-box"><strong>Health note:</strong> Our articles are for general educational purposes and are not a substitute for advice from a licensed veterinarian. Contact a veterinary professional about your pet’s individual health, diet, or behaviour needs.</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Paws & Whiskers. All rights reserved.</div>
-      <div class="footer-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="privacy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a></div>
-    </div>
-  </footer>
-
-  <div class="modal-backdrop" id="externalNotice" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal">
-      <h2 id="modalTitle">You’re opening a sponsored link</h2>
-      <p>This link goes to a third-party website and may show offers or content unrelated to pet care. Its terms and privacy practices are controlled by that provider. Continue only if you want to visit.</p>
-      <div class="modal-actions"><button class="btn btn-primary" id="continueBtn">Continue ↗</button><button class="btn btn-cancel" id="cancelBtn">Stay on this site</button></div>
-    </div>
-  </div>
-
-  <script>
-    // Replace this URL in one place if your Smartlink changes.
-    const SMARTLINK_URL = "https://asiafilm.org/4/ea7c39eea378fd6cbac12edc682a22c3";
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
-    menuBtn.addEventListener("click", () => {
-      const opened = navLinks.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(opened));
-    });
-    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded", "false");
-    }));
-
-    // The two sponsored buttons open only after an explicit visitor click and confirmation.
-    const modal = document.getElementById("externalNotice");
-    let nextUrl = null;
-    document.querySelectorAll(".smartlink").forEach(link => {
-      link.href = SMARTLINK_URL;
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        nextUrl = SMARTLINK_URL;
-        modal.classList.add("open");
-        document.getElementById("continueBtn").focus();
-      });
-    });
-    document.getElementById("continueBtn").addEventListener("click", () => {
-      if (nextUrl) window.open(nextUrl, "_blank", "noopener,noreferrer");
-      nextUrl = null;
-      modal.classList.remove("open");
-    });
-    function closeModal(){ nextUrl = null; modal.classList.remove("open"); }
-    document.getElementById("cancelBtn").addEventListener("click", closeModal);
-    modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
-    document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
-  </script>
-</body>
-</html>
+%PDF-1.4											
+%Óëéá											
+1 0 obj											
+<</Title (Paws & Whiskers | Practical Cat & Dog Care Guides)											
+/Creator (Mozilla/5.0 \(X11; Linux x86_64\) AppleWebKit/537.36 \(KHTML, like Gecko\) HeadlessChrome/151.0.0.0 Safari/537.36)											
+/Producer (Skia/PDF m151)											
+/CreationDate (D:20261112044921+00'00')											
+/ModDate (D:20261112044921+00'00')>>											
+endobj											
+3 0 obj											
+<</ca 1											
+/BM /Normal>>											
+endobj											
+7 0 obj											
+<</CA 1											
+/ca 1											
+/LC 0											
+/LJ 0											
+/LW 1											
+/ML 4											
+/SA true											
+/BM /Normal>>											
+endobj											
+8 0 obj											
+<</Type /XObject											
+/Subtype /Image											
+/Width 2820											
+/Height 1824											
+/ColorSpace /DeviceGray											
+/BitsPerComponent 8											
+/Filter /DCTDecode											
+/ColorTransform 0											
+/Length 45626>> stream											
+ÿØÿàJFIFÿÛC											
+											
+(1#%(:3=<9387@H\N@DWE78PmQW_bghg>Mqypdx\egcÿÀ ÿÄÿÄÿÚ?óðhh4`0											
+`h4 40 @h@EQEQEPQEQEPÀÀ0h@h4ESh¢Š)´QEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEÊ(¢ŠeS`00hA ÐiM¢ŠmSh¢Š)´QEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQL¢Š(¦QE2Še0`0ÀA Ñ£h¦ÑM¢›EÚ(¢›EQEQEÚ(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š)”QEQEQE2Š(¦QL¢™E2ŠeÀ 44hÚmÚ)´Ú)´Sh¢›EÚ(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š)”QE2ŠeÊ)”S(¦S(`ÆÀA£Z6›E6›M¦ÑM¦ÑM¢›E6Š)´QEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQES(¢™EÊ)”Ê)”ÊeÊe2†0`À`0h											
+4k[E6›M¦Ói´ÚmÚmÚmSh£%6Œ”QE2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L”QE2S(¢ŠeÊ)”Ê)”Êe2™E2™L¦S1ƒ€ÀƒFhÖÓi´Úm6›M¦Ói´Úm6›M¢›F[“&L·&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2Ì™2Ì™eÊ)”Êe2™L¦S)”Êe2™LcÁ€À`44kF¶›N¢Ø†Ä:ˆlCbê!´Úm6›–äËre¹2Ü™2dÉ“-É“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ–dÉ“&L™fL™fL³,Ë2Êe2™L˜dÃ&Ì2a“fL¦SÆ0`À`Ðh5­k[											
+ˆlCbD6!ÔCbD6!ÔCbê9lrÜ·-Ëre¹2Ü™nL™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dË2dË2e™fY–e™dòÉ†L9˜dÃ&Ì2aÌÃ&Ì2aÌÃ)Œc0`0 Ñ­hé­ˆlC¨†Ä:ˆuØ‡Q¢D6!ÔCc—QËc–å¹n[–å¹2Ü™nL™2dÉ“-É“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2Ì™2dÉ“,É“,Ë2e™fY–O.g–O,ž\Ì9˜dÃ™‡3˜s0æa“f0æXÆ1ƒ Ñ­×PØ‡Q											
+ˆuê!±¢D:ˆuê!Ôrê9lrê9u¶9n[–å¹n[“-É“&[“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dË2dÉ–dË2e™fY–O.g–O.g–O.g—3fÌ9˜s0æa“fÌ9˜dÃ™†KÆ0`0											
+hÖ¶¡±¢D:ˆuê!ÔC¨‡q¢D:Ž]G.£—QËc—QËc–å¹n[–å¹2e¹2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ–dË2e™fY–O.g–O.g–O.g—3Ë™‡3fL9˜s0æaÌÃ™‡3f.e’Æ1Œh4kZÖÃ¨l:ˆuê!ÔC¨‡q¢Ä:ˆuî9uºŽ]G.£—QË¨å±Ë¨å¹n[“-ËrdËrdÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2e™2e™2Ì³,Ë'–O,ž\Ï.g—3Ë™åÌòæys0âaÌÃ‰‡3fL9˜s0æaÌÃ™d¹–1ƒh5£Zê¡ÔC¨‡Q¢D;ˆuî!ÜC¸‡Qã—QË¸åÔrê9uºŽ]G-Ž[–å¹n[“-É“-É“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2e™2dË2Ì™fY–O.g–O.g—3Ë™åÌòæyq<¸ž\Ì8˜q0æaÄÃ™‡fÌ8˜dÃ™s,–1Œ0£Fµ­‡PØu¢D;ˆuî!ÜC¨‡qâÄ;Ž]Ç.ã—QË¸åÔrê9uºŽ[ºŽ[–å¹2Ü™nL™2Ü™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2e™2dÉ–dË2Ì³,žY<²ys<¹ž\Ï.g—3Ë‰åÄòâys0âaÄÃ‰‡&L9˜q0æaÌÃ™s,—,`Æ Öl:†Ã¨u¢Ä:ˆwî!ÜC¸‡q											
+D;ˆw»Ž]Ç.ã—qË¨åÔrê9uºŽ[·.²e¹nL·&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™fL³&Y–e“Ë'—3Ë™åÌòæys<¸ž\O.g—Ês&L8˜q0âaÄÃ‰‡fL9—2És,c0`4hÖµ°ê¡Ô;ˆwê!ÜB‘âÄ)î!H‡qã—qË¸åÜrî9u»Ž[ºŽ]G-Ž[–å¹2Ü™2Ü™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L³&L³,Ë2eÌòÉåÌòæys<¹ž\Ï.'—Ë‰åÄòœÃ‰„æL8˜NaÄÃ‰‡&Ì8—2æY.eŒ`Á€Ñ£ZØu											
+‡PêÃ¨‡qâˆw¤C¾aNaNaÜBœÃ¸åHåÜrî9wºŽ]Ç.£–Ç.£–Ç-ËrÜ·&[“&L™nL™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L³&L™2Ì™fL³,žY<¹žY<¹ž\O.g—Ë™å9åÄòâa>¡>¡ÇPŸPŸPâa9‡&L8˜s.%Ì²\ËÆ04kGM†Ã¨u¡Ü;ˆwî!NaNaß0§0§0§0§0¤C¾ySž]Ç*G.£—qË¸åÔrØåÔrØåÖ[“-ËrdÉ–äÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™fL™fL³,Ë'–O.g–O.g—Ë™åÄòâyq<§<¸êêêêêêêu	Ì8˜NaÄÃ™q.eÌ²\Ë%Œ0hÖµ°Øu¡Ô;‡Pî!H‡|ÂœÂœÂœÂœÂœÂœÂœÂœò§<©©»Ž]Ç.ã—QË¨åÔrê9lrë-É–å¹2e¹2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L³&L³&Y–e“Ë'—3Ë™åÌòæyq<¹žSž\uÊ}rŸ\¸ë”º„ú„ú„ú„ú„ú„ú„ú‡&K‰s.eÌ²\±ƒ4hÖ¶C¨u¡Ü;‡qù…9…9…9…y…9…9…y…9…9…9…9…#—qË¸åÜrî9uºŽ]G-Ž[–å¹nL·&L™2Ü™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™fL™2dË2e™fY<¹žY<¹ž\Ï.g—Ë‰åÇ\§×)õ	õ	õ	õ	u	õ	õ	u	õ	õ	õ&˜q.%Ì¹—2æY,c0£FµÔ6C¨wáÜ;æææææææææææææˆwî!Ürî9uºŽ]G-Ž]e¹nL·&L·&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ–dÉ–dË2Ì²ydòæys<¹ž\Ï.&L'Ô8êêêêêêêêêêêêêL'.%Ì¸—2És,–1€À5­l6C¨uáÜ;…9…9…9…9…y…9…y…y…y…9…y…9…9…9…"Ä;ˆwê!ÔC¨†Ä:¦Óh¦ÑFJmdÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉ“&L™2dÉEÊ(¦QL¦S&0æaÌÃ™‡3&L'Ô'Ô'Ô'Ô'Ô%Ô%Ô%Ô'Ô%Ô%Ô'Ô'Ô'Ô'Òrâ\K™s.eÌ²XÁƒhÖµ°ê¡Ü;‡pï•9S˜S˜W˜W˜S˜W˜W˜W˜W˜W˜S˜W˜S˜wÌ)î!ÔC¸‡Q¢Úm6›E6Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¦QL¢™L˜s0É‡3fL8˜q0ŸPã¨K¨O¨K¨O¨K¨K¨K¨K¨K¨O¨K¨O¨O¤åÄ¸—2â\Ë%Ì±ƒÑ­l6C¨u¡Ü)ùS•9…y…y…y…9…¹…y…y…y…9…y…9…9…9…"Ä:ˆwê!ÔCbM¦Óh¦ÑEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEÊ(¦S)“f0æaÌÃ‰‡&êêêêêêêêêêêêêé>“éÄ¸—æ\Ë™d¹‘ŒZ5°ê¡Ô;‡pîåNUåNa^a^a^ana^a^a^a^a^aNaNaNaÜB‘¢Ä:ˆlC¨†Ói´Ú(¦ÑEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQL¢ŠeÊdÃ™†L9˜q0æaÄÃ‰„ú„ú„ú„º„º„º„º„º„º„º„º„º„ºK¤úO§â\K‰s.e’Æ1ƒ£FÃ]C¨u¡Ü;‡p§*r¯*ò¯0¯0¯0¯0·0¯0¯0¯0¯0§0§0§0¤C¸‡q¢D:ˆlCª)´Ú)´QEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQEQE2Š)”ÊdÃ&Ì9˜s0âaÄÃ‰„ú„ú„ú„º„º„º„º„º„º„z„º„º„ºO¤ºO§œ¸—2æ\Ë™cÁ€Ñ£]CaÔ:‡PîÂœ©Êœ«Ê¼«Ê¼«Ì-Ì+Ì-Ì+Ì+Ì+Ì)Ì+Ì)Ì;ˆwî!ÔC¨‡Q
+ˆuE6›E6Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¢Š(¦QE2™L˜dÃ™‡3fL9˜NaÇP—PŸP—P—P—P—P—PP—ItItŸItŸIË‰q.%Ì¹—2Éc04tØl:‡PîÃ¸S•9S•yW•yW•¹W˜[˜W˜W˜[˜S˜W˜S˜S˜R!ÜC¸‡Q¢D6!´Úm6Š(¢›@2Š(¢™E2™Nf0æaÌÃ‰‡&êêêêêêêêé.’é’é.“é>“é9q.%Ì¹—2ÆK4u											
+l:‡PîÃ¾TåNUå^Uå^UånUånUånUå^a^aNaNaÜC¸‡q¢D:ˆu											
+hÑ CŒc&Ì9˜s0æaÄÃ‰„úO¨K¨K¤ºK¤ºG¤ºG¤ºG¤ºK¤úK¤úq.%Ä¸—2ÉrÉc€FŽ¡°êáÔ;…9S•9S•yW•¹W•¹W•¹[•yW•yW•9S—p¤:‡pê¡­4ƒÆK%Ì¸—2â\J}'Ò}%Ò]#Ò]#Ò]#Ò]#Ò]%Ò]'Ò}'.%Ä¹—És,–4k[											
+‡PêC¸wùS•9W•yW•y[•¹W•¹[•yW•yW•9S•!Ü:‡pê¡­4ÆK™d¸—2â\J}'Ò}%Ò]#Ò]#Ò=%Ò=%Ò=%Ò}%Ò}'Ó‰q.eÌ¹—2É`Á€Fµ°Øu¡Ô;‡p§.ùW•9W•¹W•¹W•¹[•y[•yW•yS•9wáÜ:‡Pê											
+kZ1’æ\Ë™s.%Ä§Ò}%Ò}#Ò]%Ò=#Ò]#Ò=%Ò]%Ò]'ÓŽ“—æ\Ë™s,`Á€Fµ­‡PêC¸w											
+r§*r¯*ò¯+r¯+r·*ò·*ò·*ò§*ò§.áÜ;‡PêCa­h4ƒ9–K™s.%Ì§.:O¤ºK¤ºK¤zK¤zG¤zK¤zK¤ºO¤úO§â\K™s,rÁƒka°êC¨wáNTåNUå^Vå^Vå^VånUånUå^UåNTåHw¡Ô:‡PØkZ41Œ—2æ\Ë™q.%>“é>’é.‘é.‘é’é‘é.’é.’é>“éÄ¸—æ\Ë%’ä`À£ZØu											
+‡PêÃ¸S•9W•9W•¹W•¹[•y[•¹W•y[•9S•9RÃ¸u¡°ê5 @`ÁŒd²\Ë™q.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}8—â\Ë™d²\Œ4k[¡°êÃ¨w											
+r§*ò¯*ò¯+r¯+r·+r¯+r¯*ò¯*r§.áÜ;‡Pê¡­4ÆK%Ì¹—æ\J}'Ò]%Ò]%Ò=%Ò=#Ò]#Ò=%Ò]%Ò}'Ó‰q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡pï•9W•yW•y[•y[•¹[•y[•yW•yS•9wáÜ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}%Ò}#Ò]#Ò]#Ò=%Ò=#Ò]%Ò]'ÓŽ“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò¯+r¯+r·+r¯+r¯*ò¯*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸItŸHô—Hô—HôItItItŸIôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºG¤ºG¤zK¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—It—HôItHôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•y[•y[•¹W•¹[•yW•¹S•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤ºK¤zG¤ºG¤zG¤ºK¤ºK¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÂœ©Êœ«Ê¼­Ê¼­ÊÜ«ÊÜ­Ê¼«ÊÜ©Êœ©ÊîC¨u¡°ÖŒË%Ì¹—2â\J}'Ò}%Ò]%Ò=#Ò]#Ò=#Ò]%Ò]%Ò}'Òrâ\Ë‰s,–K‘ƒkaÔ6C¸wáNTåNUå^Vå^VånUånVå^UånTåNTåHw¡Ô:‡PØkF€Æe’æ\Ë™q.%>“é>’é.’é‘é.‘é‘é.’é.’é>“é9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü;‡p§*r§*ò¯+r¯+r·*ò·+r¯*ò·*r§*r¤;‡PêC¨l5£F€Àc2És.eÌ¸—ŸIôŸIt—ItHô—HôHô—It—ItŸIôœ¸—2â\Ë%’ä`À£ZØu											
+‡PîÃ¸S•9S•yW•¹W•¹[•y[•¹W•y[•9S•9RÃ¨u¡Ô6Ñ£@`1ƒ™d¹—2æ\K‰O¤úO¤ºK¤ºG¤zK¤zG¤zK¤ºK¤ºO¤úN\K™q.e’Ér0`Ñ­l:†Ã¨wáÜ)Êœ©Ê¼«ÊÜ«ÊÜ­Ê¼­ÊÜ«Ê¼­Êœ©Êœ©áÔ:‡Pê											
+hÑ 0ÁÌ²\Ë™s.%Ä§Ò}'Ò]%Ò]#Ò=%Ò=#Ò=%Ò]%Ò]'Ò}'.%Ì¸—2Éd¹0hÖ¶CaÔ;‡pîåNTå^UånUånVå^VånUå^VåNTåNT‡pêC¨u											
+†´hÐ`æY.eÌ¹—âSé>“é.’é.‘é’é‘é’é.’é.“é>“—æ\K™d²\Œ4k[¡°êÃ¸w											
+r§*r¯*ò·*ò·+r¯+r·*ò¯+r§*r§*C¸u¡Ô:†ÃZ4h0s,—2æ\Ë‰q)ôŸIô—ItItHô—HôIt—It—IôŸIË‰s.%Ì²Y.F5­‡PØuáÜ;…9S•9W•yW•¹W•¹[•¹W•¹W•yW•9S•!Ü:‡PêCa­49–K™s.eÄ¸”úO¤úK¤zK¤zK¤zG¤ºG¤ºG¤ºO¤úO¤åÄ¹—æY,—#											
+ÖÃ¨l:‡pîÃ¾Tå^Uå^UånUånVånUånUå^UåNTåÜ;‡pêC¨l5£F€Àc2És.eÌ¸—ŸIô—IôItItHô—HôIt—ItŸN%9q.eÄ¹–K%ÈÁ€Fµ°ê¡Ü:‡p§*r¯*ò¯*ò·*ò·+r·*ò·*ò¯*ò§*rîÃ¸u¡°êÑ£@`1Œd²\Ë™q.eÄ§Ò}%Ò]%Ò]#Ò]#Ò=%Ò=#Ò]%Ò]'Ò}8—æ\K™d²\Œ4k[¡°êC¸w											
+r§*ò§*ò·*ò·+r¯+r·*ò¯+r§*r¯.áÜ;‡Pê¡£Z@`ÆK%Ì¹—æS”úO¤úK¤ºK¤zG¤ºG¤zK¤zK¤ºK¤úO§â\K™s,–K‘ƒka°êC¨wáNTåNUå^Vå^Vå^VånUånUå^UåNTåHw¡Ô:‡PØt4h0c.eÌ¹—2â\J}'Ò}%Ò]#Ò]#Ò=%Ò=#Ò]%Ò]%Ò}'Ó‰q.%Ì¹–K%ÈÁ€Fµ­‡PêC¸w											
+r§*r¯*ò¯+r¯+r·*ò·*ò·*ò§*ò§.áÜ;‡PêCa­h4ƒ9–K™s.eÄ§.:O¤ºK¤ºK¤zK¤zG¤ºG¤zK¤ºO¤úN\K‰q.eÌ±Ë5­†Ã¨u¡Ü;…9wÊ¼«Êœ­Ê¼­Ê¼­ÊÜ«ÊÜ«Ê¼«Êœ©Ë¸RC¨u¡°èk@`Æ2\Ë™s.eÄ¸”úO¤úK¤zK¤ºG¤zK¤zG¤ºK¤ºK§'Òrâ\Ë™s.eŒ0hÖ¶¡Ô:‡pîò§*r¯*ò¯+r¯+r¯+r·*ò¯*ò¯*r§*C¸uáÔ6CZ4h1Œ–K™s.%Ä¸”úO¤úK¤ºG¤ºG¤ºG¤zK¤ºG¤úK¤úN\K‰s.eÌ¹–0`À£ZØl:†Ã¸uáNTåNUåNVå^UånVå^Vå^Uå^UåNTåHw¡Ü:†Ã¨kZ											
+`Æ1’És.eÄ¸—ŸIôŸIt—Hô—Hô—Hô—Hô—It—IôŸIË‰q.eÄ²\Ë%ƒ											
+:†¶C¨wáN]ò§*ò¯*ò¯+r¯+r¯+r¯*ò¯*ò§2§2î%H—Q.¢]Ä¶CZ4h1Œ—2É—.f\L¸™O©O¤ºO¤ºG¤ºG¤ºG¤ºG¤ºK¤úK¤úq.%Ä¸—2ÉrÉc€FŽ›											
+‡PêÃ¸w											
+r§*r¯*ò¯*ò·*ò·2¯2·2¯2¯2§2§2§2¤K¸—q.¢]Dº‰lKm¶Ûm–[K,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²ÂÙe²Ëe²Ù2æeÌË™—.&\L§Ô§Ô§Ô¥Ô¥Ô¥Ô¥Ô£Ô¥Ò=%Ò=%Ò}%Ò}')Ë‰q.eÌ¹–2XÀ`Ñ£]CaÔ:‡PîÂœ©Êœ«Ê¼«Ê¼­Ì«Ì«Ì­Ì«Ì«Ì«Ì«Ì©Ì©Ì»‰wî%ÔK¨—Q.¢[m²Ûe¶Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ùe²Ùl™dË™—3.f\Ì¸™NeÇRŸR—RŸR—RR—R—RR—R—Hô—Iô—Iôœ¸—â\Ë™s,–1ƒ£FÃ]C¨u¡Ü;‡p§*r¯*ò¯2¯2¯2¯2·2¯2¯2¯2¯2¯2§2§2î%ÜK¸—Q.¢]Dº‰m¶Ëm–Û,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ëe–Ëe²e“.f\Ì¹™s2âe9—J}J]J}J]J]J=J]J]J]J=J]J]'Ò]'Ó‰N\K™s.eÌ²XÆ­Øu											
+‡PîC¸Rò§*ò§2¯2¯2·2¯2¯2¯2¯2¯2¯2§2§2§2¤K¸—q.¢]Dº‰lKm¶Ûm–Û,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ùe–Ëe²e“.f\Ì¹™q2âeÄÊ}J}J}J]J}J]J]J=J]J]J]J]J]'Ò]'Ó‰q.%Ä¹—2ÉcÁ€4k[											
+‡PêC¸u											
+C¾Tå^TæUæUæUæUæUæUæUæUæTæUæTæTæ]Ä»‰wê%ÔK¨—Q-¶Ûl¶Ùe–Ym²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ùe–Ye²Ëe²Ù2É—3.f\Ì¹™q2œËŽ¥>¥>¥.¥.¥.¥.¥.¥.¥.¥.¥.¥>¥.“é>œK‰q.eÌ¹–K™%ŒFµ­u											
+‡PîÃ¸wÊœ©Ì«Ì©Ì«Ì«Ì«Ì«Ì©Ì«Ì«Ì«Ì©Ì©Ì©Ì»‰wî%ÔK¨—Q-‰um²Ûm²Ë,¶Ùe–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–[,²Ëe–Ëe²e“.f\Ì¹™q2æe9—J}J}J]J}J]J]J]J]J]J}J]J]J}J}8”åÄ¹—æY.eŒ0ka°Øu¡Ô;‡pîåNeNeNe^e^eNe^e^e^eNe^eNeNeß2¤K¸—Q.â]D¶%ÔKb[m¶Ùm³E–Yeš4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£E–Ye–[,¶Yl¶L¹™dË™—.f\L¸™qÔ§Ô§Ô¥Ô§Ô¥Ô¥Ô§Ô¥Ô¥Ô§Ô¥Ô§Ô§Ô§Òrâ\Ë‰s.eÌ²XÁƒhÑ­‡PØuáÔ;‡p¤K¾eNeNe^eNe^eNe^e^eNeNeNeNeH—q.ã§QÓ¸éÔtê:ltÝ7MÓtiº4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÓ4iš4Í2zs=2zs=9žœON'§.:”ú”ú”ú”ú”º”ú”º”ú”º”ú”º”ú”ú—)Ë‰s.%Ì²\Ë%Œ`0ÖÃ¨u¡Ô;‡q.âTæ]ó*s*ó*s*s*ó*s*s*ó*s*sÓ¸•#§qÓ¸éÔtî:u6:u7MÓtiº4Ý4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£Fff™¦i“Ó'§3Ó'§Ó™éÄôâzq×N:é>¥>¥.¥>¥>¥.¥>¥>¥.¥>¥>¥ÄÊs.%Ä¹—2æ\Ë%Œc											
+Ö¶¡Ô:‡pîÄ»‰S™wÌ©Ì©Ì©Ì«Ì©Ì©Ì©ÏJsÒ‘Ó¸éHéÜtê:w:ŽGN£¦ÇMÓtÝ7F›£F4hÓthÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£LÑ£F4Íf3LžœÏLžœÏNg§3Ó‰éÄôâzO®œOIõÒ}J}J}J]J}J}J}J}K‰”æ\L¸—æ\Ë™d¹–0`À£ZÖÃa°êC¸uâ]Ä©ï™S™S™S™wÌ©Ì©Ì©§=)ÏNã§qÓ¸éÜtê:u:ŽGMŽ›¦éºn7F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£Ff3F™¦ONg¦ONg§3Ó™éÄôæzq='=8ž“êSêSêSê\u)õ)õ)õ)Ì¸™q2âeÄ¸—2æY.eŒ`Á€FkaÔ6C¸uî%ÔJ‘.â]Ä©Ì©Ì»æTæT‰w);Ž”ŽÇN£§qÓ¨éÔtê:u6:n›¦èÓtiº4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4iš4Í3F™§3Ó'§3Ó™éÌôæzq=8žœON'¤ç§J}J}J}KŽ¥9—)Ì¸™q2âeÌ¸—2És,–1Œ											
+5­l:†Ã¨wê%ÜK¸—q.â]Ä©î%H—q.ã¥#§qÓ¸éÜtî:u:ŽGN£¦ÇN£¦éº4Ýnn4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÓ4hÑ¦hÓ4Í3Lž™=9žœÏNg§3Ó‰éÄôæzNzq=8™NeÄÊs.&\L§2âeÄË‰—3.%Ì¹–K%Ë0`4Ñ®¡°Øu¡ÜK¨—q.â]D»‰R%ÜK¸—q.âTŽÇN£§qÓ¸éÔtê:u6:u7MÓtÝn7F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F™£F™¦hÓ4ÉéÌôÉéÌôæzs=8žœÏN'§Ó‰éÄË‰”æ\L¸™q2âeÄË‰—3.&\Ë™d¹–1Œ0Ö¶CaÔ:‰uî%ÔK¸—q.â]Ä»‰wî%Ôtî:w:ŽÇN£§QÓc§QÓc§Zn7MÑ¦èÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£LÑ¦hÓ4Í2zdôæzdôæzs=9žœONg§Ó‰éÄË‰—.&\L¸™s2âeÌË‰—2æ\Ë%’åƒ Ök¨l:‡Q.¢]Dº‰wê%ÜK¸—Q.â]ÄºŽÇN£§qÓ¨éÔtê:ltê:ltÝ7MÑ¦èÓthÑ£MÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ¦hÑ£F3F™¦hÓ2zdôæzdôæzs=8žœÏNg§Ó‰—3.&\L¸™s2âeÌË™—3.eÌ¹–KÆÐhÖµ°Øu											
+‰uê%ÔK¨—q.¢]D»‰uî%Ôtî:u:ŽGN£¦ÇN£¦ÇMÓtÝ7MÑ¦èÑ£MÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4Í4išf3LÓ'¦ONg¦ONg§3Ó™éÌôâzs2æeÄË™—.f\L¹™s2æeÌË™d²\±ƒ											
+hÖ¶Cb]D¶%ÔK¨—Q.¢]Äº‰uê%ÔK¨—QÓ¨éÔtê:ltê:n›¦éºn7F7F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F™£F™£LÓ4išs=2zdôæzs=9žœÏNf\Ì¹™s2æeÄË™—3.f\Ì¹™dË™d±ŒcƒF´k¦Ãb]D¶%ÔK¨—Q.¢]Dº‰uê%±Ó¨éÔtê:ltê:n›¦éºn7F›£F4Ý4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£Ff4hÓ4iš4Í3LÓ'¦OLžœÏLžœÏNg¦ONf\Ì¹™s2æeÌË™—3,™s2æe’Éc1€À											
+Öµ­†Äº‰lK¨–Äº‰uê%±.¢]D¶%ÔtØéÔtØéºn›¦èÓtiº4iº4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4iš4iš4Í3LÑ§:dôÉé“Ó™éÌË&\Ì¹™dË™—3,™s2æe“,™s,c0`0ƒFkZØ–Ä¶%ÔKb]D¶%ÔKb]D¶%±.¢[6:n›¦éºn›£F›£F›£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F™£F™£LÑ¦išf™¦i“.fY2æe“.fY2æe“.fY2É—6Æ1ƒ044kZÖÛm±-‰lK¨–Ä¶%ÔKb[Ûm¶Û¦éºn7F›£F›£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F3Ff3LÑ¦iše²Ù2æe“,™dË™–L²eÌË-–Ëc1ƒ`44kF¶Ûm¶Ûm¶êÛm¶Ûm¶Ûm–Ûn‹nn4hÓthÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£LÑ£Ff3E³E²Ùl¶[-–Ëe²Ùl¶[-–Ëc1€À`											
+£Fkm¶[m¶Ûm¶Ûm¶Ùm¶Ùm²Ûe–ÝY£E–Û4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F4hÑ£F-–Y£F‹,¶Ye²Ëe²Ëe²Ùe²Ùl¶[-–Ë`Æ0`044m¶Ûe¶Ûm¶Ùm¶Ùm²Ûe–Û,²Ëm–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–[,²Ë-–[,¶Yl²Ùl¶Yl¶[,¶1ƒ€4ƒFim²Ûm²Ûe¶Ûe–Û,¶Ùe–Ym²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë-–Ye–Yl²Ëe–Ë-–[-–[-–0`Á€À`Ð											
+e¶Ëm–Û-¶Ym²Ë,²Ûe–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Yl²Ë,¶Ye²Ë-–[,¶Yl0`0ÐƒA£BÛe¶Ë-¶Ye¶Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ëe–Yl²Ëe–[,`0`€ÐA 6Ë-¶Ye–Û,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,²Ë,¶Ye–[,±€À``@€ÐÛ,,²Ë,²Ûe–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–[,°²Ë,²ËÐ @€Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Ye–Y`0@h											
+À`Ð 0`@											
+ÿÙ											
+endstream											
+endobj											
+9 0 obj											
+<</ca .102											
+/BM /Normal>>											
+endobj											
+10 0 obj											
+<</Type /XObject											
+/Subtype /Form											
+/Resources <</ProcSet [/PDF /Text /ImageB /ImageC /ImageI]											
+/ExtGState <</G3 3 0 R>>											
+/XObject <</X8 8 0 R>>>>											
+/BBox [-135 1361 2685 3185]											
+/Group <</Type /Group											
+/S /Transparency											
+/CS /DeviceGray											
+/I true>>											
+/Length 64>> stream											
+q											
+2820 0 0 -1824 -135 3185 cm											
+0 0 0 RG 0 0 0 rg											
+/G3 gs											
+/X8 Do											
+Q											
